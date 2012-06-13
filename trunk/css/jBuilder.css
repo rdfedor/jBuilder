@@ -1,0 +1,26 @@
+body {
+    font-family: Arial, Verdana;
+    font-size : 0.85em;
+}
+
+.jBtextfield .fieldLabel, .jBpassword .fieldLabel, .jBcheckbox .fieldLabel {
+    float : left;
+    width : 100px;
+    line-height : 30px;
+    clear : left;
+}
+
+.jBbutton button {
+    float : right;
+}
+
+.clrLeft {
+    clear : left;
+}
+
+.interface {
+    margin : 0;
+    padding: 0;
+    height : 100%;
+    background-color : #FFFFFF;
+}
