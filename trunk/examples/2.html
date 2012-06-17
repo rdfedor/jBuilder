@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-    <title>jBuilder Example 1</title>
+    <title>jBuilder Example 2</title>
 
     <link rel="stylesheet" href="../css/ui-lightness/jquery-ui-1.8.21.custom.css" />
     <link rel="stylesheet" href="../css/jBuilder.css" />
@@ -35,6 +35,10 @@
             jQuery.jBuilder.extend("loginForm.loginPanel", {
                 extend : "form.panel",
                 alias : "loginPanel",
+                defaults : {
+                    anchor : "30%"
+                },
+                method : "POST",
                 items : [{
                     type : "textfield",
                     name : "username",
@@ -96,6 +100,11 @@
             jQuery.jBuilder.extend("loginForm.registerPanel", {
                 extend : "form.panel",
                 alias : "registerPanel",
+                defaults : {
+                    type : "textfield",
+                    anchor : "30%"
+                },
+                method : "POST",
                 items : [{
                     name : "username",
                     label : "Username",
@@ -132,21 +141,12 @@
                 width : 400,
                 items : [{
                     type : "loginPanel",
-                    method : "POST",
                     label : "Login",
-                    defaults : {
-                        anchor : "30%"
-                    },
                     id : "loginForm1"
                 },{
                     type : "registerPanel",
-                    method : "POST",
                     label : "Register",
-                    id : "registerForm",
-                    defaults : {
-                        type : "textfield",
-                        anchor : "30%"
-                    }
+                    id : "registerForm"
                 }]
             });
         });

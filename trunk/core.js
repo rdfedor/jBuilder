@@ -53,7 +53,7 @@ jQuery.extend({
                         }
                         next = next[path[x]];
                     }
-                    params = jQuery.extend(new next[className],params);
+                    params = jQuery.extend(new next[className](params),params);
                 }
 
                 // Create a unique id for this new element
