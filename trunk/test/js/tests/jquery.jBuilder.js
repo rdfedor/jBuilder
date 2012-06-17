@@ -1,5 +1,9 @@
 module("jBuilder");
 
+test("jQuery.jBuilder", function() {
+	ok($.jB == jQuery.jBuilder, "Shorthand object matches main object");
+});
+
 test("jQuery.jBuilder.extend Test", function() {
 	jQuery.jBuilder.extend("dummy.test", {
 	    alias : "dummyTest",

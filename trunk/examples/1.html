@@ -70,7 +70,7 @@
                         },{
                             text : "Retrieve",
                             handler : function() {
-                                new jQuery.jBuilder.dialog({
+                                new jQuery.jBuilder.window({
                                     title : "Retrieve Password",
                                     modal : true,
                                     minWidth : 340,
@@ -143,8 +143,8 @@
             jQuery.jBuilder.build(form);
 
             form.layout = "accordion";
-            form.renderTo = jQuery("#accordion-layout-example");
-            jQuery.jBuilder.build(form);
+            form.renderTo = $("#accordion-layout-example");
+            $.jB.build(form);
         });
     </script>
 </head>

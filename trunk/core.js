@@ -147,3 +147,6 @@ jQuery.extend({
         }
 	}
 });
+
+// Shorthand the jBuilder object for easy development
+jQuery.jB = jQuery.jBuilder;

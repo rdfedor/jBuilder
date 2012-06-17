@@ -1,5 +1,10 @@
 jQuery.extend(jQuery.jBuilder, {
     defaultPluginFunctions : {
+        tpl : "<div #attr#>#body#</div>",
+
+        attributes : ['id','class'],
+        items : [],
+
         buildClassAttr : function() {
             var ret = [];
             ret.push(this.eleID);
@@ -91,6 +96,17 @@ jQuery.extend(jQuery.jBuilder, {
         destroy : function() {
             jQuery("." + this.eleID).remove();
             delete jQuery.jBuilder.elements[this.eleID];
+        },
+
+        doLayout : function() {
+            this.style = this.buildStyleAttr();
+
+            if (this.style !== null) {
+                this.attributes.push("style");
+            }
+
+            return this.tpl.replace("#attr#",this.buildElementAttr(this.attributes,this))
+                .replace("#body#",jQuery.jBuilder.doLayout(this.items));
         }
     }
 });
