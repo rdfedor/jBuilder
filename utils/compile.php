@@ -25,6 +25,7 @@ $files = array(
 	'util/defaultPluginFunctions.js',
 	'util/uid.js',
 	'util/window.js',
+	'util/filter.js',
 	'content/html.js',
 	'layout/accordion.js',
 	'layout/tab.js',
