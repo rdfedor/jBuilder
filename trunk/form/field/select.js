@@ -1,8 +1,6 @@
 jQuery.jBuilder.extend("form.field.select", {
     alias : "select",
 
-    tpl : "<div #attr#>#label#<select #inputAttr#>#options#</select></div>",
-
     attributes : ["id","class"],
     inputAttributes : ['name', 'multiple', 'size', 'disabled', 'title', 'tabindex'],
     selectAttributes : ['label','value','disabled','selected'],
@@ -14,30 +12,20 @@ jQuery.jBuilder.extend("form.field.select", {
     },
 
     doLayout : function() {
-        var label = new jQuery.jBuilder.form.field.label(this.cfg);
-
-        this.class = this.buildClassAttr();
-
-        var style = this.buildStyleAttr();
-        if (style !== null) {
-            this.style = style;
-            this.attributes.push("style");
-        }
-
-        return this.tpl.replace("#attr#", this.buildElementAttr(this.attributes,this))
-            .replace("#label#", label.doLayout())
-            .replace("#inputAttr#", this.buildElementAttr(this.inputAttributes,this))
-            .replace("#options#", this.processOptions());
-    },
-
-    processOptions : function() {
-        var opts = [],
+        var label = new jQuery.jBuilder.form.field.label(this.cfg),
             that = this;
 
-        jQuery.each(this.items, function(index,opt) {
-            opts.push("<option " + that.buildElementAttr(that.selectAttributes,opt) + ">" + opt.label + "</option>");
-        });
+        this.element = jQuery("<div>").append(label.doLayout());
 
-        return opts.join("");
+        var selectElement = jQuery("<select>").attr(jQuery.jBuilder.intersect(this.inputAttributes,this));
+
+        jQuery.each(this.items,function(index,opt) {
+            selectElement.append(jQuery("<option>").text(opt.label).attr(jQuery.jBuilder.intersect(that.selectAttributes,opt)));
+        });
+        this.element.append(selectElement);
+
+        this.buildElementAttr().buildStyleAttr().buildClassAttr();
+
+        return this.element;
     }
 });

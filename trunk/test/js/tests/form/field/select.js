@@ -18,7 +18,7 @@ test("jBuilder.form.field.select", function() {
         ]
     });
 
-    var html = select.doLayout();
+    var html = select.doLayout()[0].outerHTML;
 
     ok(true, "Data : " + html);
     ok(html.indexOf("id=\"testSelect\"") != -1, "Check for id");
@@ -28,6 +28,6 @@ test("jBuilder.form.field.select", function() {
     ok(html.indexOf("tabindex=\"2\"") != -1, "Check for tabindex");
     ok(html.indexOf("<option label=\"Opt 1\">Opt 1</option>") != -1, "Check for option 1 HTML");
     ok(html.indexOf("<option label=\"Opt 2\" value=\"2\">Opt 2</option>") != -1, "Check for option 2 HTML");
-    ok(html.indexOf("<option label=\"Opt 3\" value=\"3\" selected>Opt 3</option>") != -1, "Check for option 3 HTML");
-    ok(html.indexOf("<option label=\"Opt 4\" disabled>Opt 4</option>") != -1, "Check for option 4 HTML");
+    ok(html.indexOf("<option label=\"Opt 3\" value=\"3\" selected=\"selected\">Opt 3</option>") != -1, "Check for option 3 HTML");
+    ok(html.indexOf("<option label=\"Opt 4\" disabled=\"disabled\">Opt 4</option>") != -1, "Check for option 4 HTML");
 });

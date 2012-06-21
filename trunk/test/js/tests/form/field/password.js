@@ -9,7 +9,7 @@ test("jBuilder.form.field.password", function() {
         tabindex : 2
     });
 
-    var html = password.doLayout();
+    var html = password.doLayout()[0].outerHTML;
 
     ok(true, "Data : " + html);
     ok(html.indexOf("id=\"testPasswordField\"") != -1, "Check for id and testPasswordField");

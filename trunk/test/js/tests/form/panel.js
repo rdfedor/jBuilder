@@ -17,7 +17,7 @@ test("jBuilder.form.panel", function() {
 	
 	ok(test1.constructor.toString().indexOf("function") != -1, "Check if form panel initialized");
 	
-	var html = test1.doLayout();
+	var html = test1.doLayout()[0].outerHTML;
 	ok(true, "Data : " + html);
 	ok(html.constructor == String, "Check that doLayout returned a string");
 	ok(html.indexOf("id") != -1 && html.indexOf("testIDForm") != -1, "Check that testIDForm was inserted");

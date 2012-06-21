@@ -2,13 +2,12 @@ jQuery.jBuilder.extend("util.window",{
     tpl : "<div #attr#>#body#</div>",
 
     attributes : ['id','title', 'class'],
-    events : {
-        afterRender : function(e) {
-            e.el.show();
-        }
-    },
 
-    show : function() {
+    doLayout : function() {
+
+        this.element = jQuery("<div>").html(jQuery.jBuilder.doLayout(this.items));
+        this.buildElementAttr();
+
         var filter = ['width','height', 'resizable', 'buttons','modal','minWidth', 'maxWidth'],
             cfg = {},
             that = this;
@@ -20,21 +19,9 @@ jQuery.jBuilder.extend("util.window",{
         if (cfg.width !== undefined) {
             cfg.width = cfg.width + 40;
         }
-        jQuery("#" + this.eleID).dialog(cfg);
-    },
+        this.element.dialog(cfg);
 
-    doLayout : function() {
-        jQuery(document).bind("afterRender", function(e){
-            e.el = that;
-            return that.events.afterRender(e);
-        });
-
-        this.id = this.eleID;
-        var attr = this.buildElementAttr(this.attributes,this);
-        var body = jQuery.jBuilder.doLayout(this.items);
-        var that = this;
-
-        return this.tpl.replace("#attr#", attr).replace("#body#",body);
+        return this;
     }
 });
 

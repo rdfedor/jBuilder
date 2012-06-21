@@ -3,8 +3,6 @@ jQuery.jBuilder.extend("form.field.textfield", {
 
     inputType : "textfield",
 
-    tpl : "<div #attr#>#label#<input #inputAttr#/></div>",
-
     attributes : ["id","class"],
     inputAttributes : ['type','name', 'value', 'disabled', 'title', 'tabindex'],
 
@@ -12,18 +10,17 @@ jQuery.jBuilder.extend("form.field.textfield", {
 
     doLayout : function() {
         var label = new jQuery.jBuilder.form.field.label(this.cfg);
+
         this.type = this.inputType;
 
-        this.class = this.buildClassAttr();
+        var inputField = jQuery("<input>").attr(jQuery.jBuilder.intersect(this.inputAttributes,this));
 
-        var style = this.buildStyleAttr();
-        if (style !== null) {
-            this.style = style;
-            this.inputAttributes.push("style");
-        }
+        this.buildStyleAttr(null,inputField);
 
-        return this.tpl.replace("#attr#", this.buildElementAttr(this.attributes,this))
-        			.replace("#label#", label.doLayout())
-                    .replace("#inputAttr#", this.buildElementAttr(this.inputAttributes,this));
+        this.element = jQuery("<div>").append(label.doLayout()).append(inputField);
+
+        this.buildElementAttr().buildClassAttr();
+
+        return this.element;
     }
 });

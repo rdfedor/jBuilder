@@ -17,15 +17,15 @@ test("jBuilder.form.field.checkbox", function() {
         ]
     });
 
-    var html = checkbox.doLayout();
+    var html = checkbox.doLayout()[0].outerHTML;
 
     ok(true, "Data : " + html);
     ok(html.indexOf("id=\"testDropDown\"") != -1, "Check for id");
     ok(html.indexOf("testClass") != -1, "Check for class");
     ok(html.indexOf("Test Label") != -1, "Check for label");
     ok(html.indexOf("tabindex=\"2\"") != -1, "Check for tabindex");
-    ok(html.indexOf("value=\"Opt 1\" tabindex=\"1\" />") != -1, "Check for option 1 HTML");
+    ok(html.indexOf("value=\"Opt 1\" tabindex=\"1\">") != -1, "Check for option 1 HTML");
     ok(html.indexOf("value=\"2\" tabindex=\"2\"") != -1, "Check for option 2 HTML");
-    ok(html.indexOf("value=\"3\" tabindex=\"3\" />") != -1, "Check for option 3 HTML");
-    ok(html.indexOf("value=\"Opt 4\" tabindex=\"4\" disabled />") != -1, "Check for option 4 HTML");
+    ok(html.indexOf("value=\"3\" tabindex=\"3\">") != -1, "Check for option 3 HTML");
+    ok(html.indexOf("value=\"Opt 4\" tabindex=\"4\" disabled=\"disabled\">") != -1, "Check for option 4 HTML");
 });

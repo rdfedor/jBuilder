@@ -1,6 +1,6 @@
 jQuery.extend(jQuery.jBuilder,{
-    intersect : function(obj,params) {
-        var newObj = obj.constructor();
+    intersect : function(params,obj) {
+        var newObj = {};
         jQuery.each(params, function(index,item){
             if (obj[item] !== undefined) {
                 newObj[item] = obj[item];
@@ -9,7 +9,7 @@ jQuery.extend(jQuery.jBuilder,{
 
         return newObj;
     },
-    filter : function(obj,params) {
+    filter : function(params,obj) {
         var newObj = {};
         jQuery.each(obj, function(index,item){
             if (jQuery.inArray(index,params) == -1 && (item.constructor == String || item.constructor == Object

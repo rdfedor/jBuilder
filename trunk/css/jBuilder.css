@@ -3,7 +3,11 @@ body {
     font-size : 0.85em;
 }
 
-.jBtextfield .fieldLabel, .jBpassword .fieldLabel, .jBcheckbox .fieldLabel {
+.jBradiogroup, .jBtextfield, .jBpassword, .jBcheckbox, .jBselect, .jBbutton {
+    line-height: 30px;
+}
+
+.fieldLabel {
     float : left;
     width : 100px;
     line-height : 30px;
@@ -16,6 +20,7 @@ body {
 
 .clrLeft {
     clear : left;
+    line-height : 0px;
 }
 
 .interface {

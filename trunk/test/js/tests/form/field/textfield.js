@@ -9,7 +9,7 @@ test("jBuilder.form.field.textfield", function() {
         tabindex : 2
     });
 
-    var html = textfield.doLayout();
+    var html = textfield.doLayout()[0].outerHTML;
 
     ok(true, "Data : " + html);
     ok(html.indexOf("type=\"textfield\"") != -1, "Check for textfield type");

@@ -1,8 +1,6 @@
 jQuery.jBuilder.extend("layout.accordion", {
     layout : "accordion",
 
-    tpl : "<div #attr#>#body#</div>",
-    innertpl : "<h3><a href='#'>#label#</a></h3><div>#body#</div>",
     attributes : ["id", "class", "method", "name", "action"],
 
     init : function() {
@@ -20,8 +18,6 @@ jQuery.jBuilder.extend("layout.accordion", {
             throw new Error("Form has no elements");
         }
 
-        this.class = this.buildClassAttr();
-
         var that = this;
 
         jQuery(document).bind("afterRender",function() {
@@ -29,22 +25,20 @@ jQuery.jBuilder.extend("layout.accordion", {
             jQuery(document).unbind("afterRender", this);
         });
 
-        var style = this.buildStyleAttr();
-        if (style !== null) {
-            this.style = style;
-            this.attributes.push("style");
-        }
+        this.element = jQuery("<div>");
 
-        var innerBody = [];
+        this.buildElementAttr().buildStyleAttr().buildClassAttr();
+
         if (!jQuery.isArray(this.items)) {
             this.items = [this.items];
         }
+
         jQuery.each(this.items,function(index,obj) {
-            innerBody.push(that.innertpl.replace("#label#", obj.label)
-                .replace("#body#",jQuery.jBuilder.doLayout(obj, this.defaults)));
+            jQuery("<a>").attr("href","#").html(obj.label)
+                .add(jQuery("<div>").html(jQuery.jBuilder.doLayout(obj, this.defaults)))
+                .appendTo(this.element);
         });
 
-        return this.tpl.replace("#attr#", this.buildElementAttr(this.attributes,this))
-            .replace("#body#", innerBody.join(""));
+        return this.element;
     }
 });

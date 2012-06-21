@@ -34,7 +34,7 @@ test("jQuery.jBuilder.doLayout Test", function() {
 	var html = jQuery.jBuilder.doLayout(jsonForm);
 	ok(true, "Data : " + html);
 	ok(html.length > 0, "HTML has content");
-	ok(html.indexOf("<form") != -1, "Checking for form");
-	ok(html.indexOf("textfield") != -1, "Checking for textfield");
-	ok(html.indexOf("Test Input") != -1, "Checking for textfield label");
+	ok(html[0].outerHTML.indexOf("<form") != -1, "Checking for form");
+	ok(html[0].outerHTML.indexOf("textfield") != -1, "Checking for textfield");
+	ok(html[0].outerHTML.indexOf("Test Input") != -1, "Checking for textfield label");
 });

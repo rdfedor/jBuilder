@@ -1,8 +1,6 @@
 jQuery.jBuilder.extend("form.field.label", {
     alias : "label",
 
-    tpl : "<div class=\"fieldLabel\" #attr#>#label#</div>",
-
     attributes : [],
 
     init : function() {
@@ -12,21 +10,18 @@ jQuery.jBuilder.extend("form.field.label", {
     },
 
     doLayout : function() {
+        this.element = jQuery("<div>").addClass("fieldLabel");
+
         if (this.anchor !== undefined) {
             this.width = this.anchor;
         }
-        var style = this.buildStyleAttr();
-        if (style !== null) {
-            this.style = style;
-            this.attributes.push("style");
+
+        if (this.noLabel === undefined || !this.noLabel) {
+            this.element.html(this.label);
         }
 
-        if (this.noLabel !== undefined && this.noLabel) {
-            this.label = "";
-        }
+        this.buildStyleAttr();
 
-        return this.tpl
-                .replace("#attr#", this.buildElementAttr(this.attributes,this))
-                .replace("#label#", this.label);
+        return this.element;
     }
 });

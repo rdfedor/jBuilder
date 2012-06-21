@@ -38,6 +38,9 @@ jQuery.extend({
 
             // Create the function to instantiate a new plugin
             next[className] = function(cfg) {
+
+                var that = this;
+
                 // Combine this object with some default functions
                 jQuery.extend(this, jQuery.jBuilder.defaultPluginFunctions);
 
@@ -53,7 +56,17 @@ jQuery.extend({
                         }
                         next = next[path[x]];
                     }
-                    params = jQuery.extend(new next[className](params),params);
+                    params = jQuery.extend(new next[className](cfg),params);
+                }
+
+                if (params.ref !== undefined && params.ref.constructor == Object) {
+                    jQuery.each(params.ref,function(index,value) {
+                        var funcName = index.charAt(0).toUpperCase + index.slice(1);
+                        that["get" + funcName] = function() {
+                            return jQuery(value,that.element).find(value);
+                        };
+
+                    });
                 }
 
                 // Create a unique id for this new element
@@ -106,10 +119,10 @@ jQuery.extend({
             if (defaultCfg === undefined) {
                 defaultCfg = {};
             } else {
-                defaultCfg = jQuery.jBuilder.filter(defaultCfg,["defaults"]);
+                defaultCfg = jQuery.jBuilder.filter(["defaults"],defaultCfg);
             }
 
-        	var ret = "",
+        	var ret = jQuery(""),
                 that = this;
         	
         	jQuery.each(arr,function(index,obj) {
@@ -140,7 +153,7 @@ jQuery.extend({
 
                 var retObj = new next[className](obj);
                 that.elements[retObj.eleID] = retObj;
-                ret += retObj.doLayout();
+                ret = ret.add(retObj.doLayout());
         	});
         	
             return ret;

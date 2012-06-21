@@ -8,21 +8,20 @@ jQuery.jBuilder.extend("content.html", {
     class : "",
 
     doLayout : function() {
-        var text = "",
-            that = this;
+        var that = this;
 
-        this.style = this.buildStyleAttr();
+        this.element = jQuery("<div>");
 
-        if (this.text !== undefined) {
-            text = this.text;
-        }
+        this.buildElementAttr().buildStyleAttr().buildClassAttr();
+
         if (this.url !== undefined) {
             jQuery.get(this.url, function(data) {
-                jQuery("div." + that.eleID).html(data);
+                that.element.html(data);
             });
+        } else {
+            this.element.html(this.text);
         }
 
-        return this.tpl.replace("#attr#",this.buildElementAttr(this.attributes,this))
-            .replace("#text#",text);
+        return this.element;
     }
 });

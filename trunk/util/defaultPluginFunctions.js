@@ -1,18 +1,23 @@
 jQuery.extend(jQuery.jBuilder, {
     defaultPluginFunctions : {
 
+        element : null,
+
         buildClassAttr : function() {
-            var ret = [];
-            ret.push(this.eleID);
+            this.element.addClass(this.eleID);
             if (this.alias !== undefined) {
-                ret.push("jB" + this.alias);
+                this.element.addClass("jB" + this.alias)
             }
-            ret.push(this.class);
-            return ret.join(" ");
+
+            return this;
         },
-        buildStyleAttr : function(obj) {
-            if (obj === undefined) {
+        buildStyleAttr : function(obj, onObject) {
+            if (obj === undefined || obj == null) {
                 obj = this;
+            }
+
+            if (onObject === undefined || onObject == null) {
+                onObject = this.element;
             }
 
             function formatValue(val) {
@@ -23,71 +28,73 @@ jQuery.extend(jQuery.jBuilder, {
                 }
             }
 
-            var ret = [];
+            var css = {};
             if (obj.width !== undefined) {
-                ret.push("width : " + formatValue(obj.width));
+                css.width = formatValue(obj.width);
             }
 
             if (obj.padding !== undefined && obj.padding.constructor !== Object) {
-                ret.push("padding : " + formatValue(obj.padding));
+                css.padding = formatValue(obj.padding);
             }else if (obj.padding !== undefined && obj.padding.constructor == Object) {
                 if (obj.padding.left !== undefined) {
-                    ret.push("padding-left : " + formatValue(obj.padding.left));
+                    css['padding-left'] = formatValue(obj.padding.left);
                 }
                 if (obj.padding.right !== undefined) {
-                    ret.push("padding-right : " + formatValue(obj.padding.right));
+                    css['padding-right'] = formatValue(obj.padding.right);
                 }
                 if (obj.padding.top !== undefined) {
-                    ret.push("padding-top : " + formatValue(obj.padding.top));
+                    css['padding-top'] = formatValue(obj.padding.top);
                 }
                 if (obj.padding.bottom !== undefined) {
-                    ret.push("padding-bottom : " + formatValue(obj.padding.bottom));
+                    css['padding-bottom'] = formatValue(obj.padding.bottom);
                 }
             }
 
             if (obj.margin !== undefined && obj.margin.constructor !== Object) {
-                ret.push("margin : " + formatValue(obj.margin));
+                css.margin = formatValue(obj.margin);
             } else if (obj.margin !== undefined && obj.margin.constructor == Object) {
                 if (obj.margin.left !== undefined) {
-                    ret.push("margin-left : " + formatValue(obj.margin.left));
+                    css["margin-left"] = formatValue(obj.margin.left);
                 }
                 if (obj.margin.right !== undefined) {
-                    ret.push("margin-right : " + formatValue(obj.margin.right));
+                    css["margin-right"] = formatValue(obj.margin.right);
                 }
                 if (obj.margin.top !== undefined) {
-                    ret.push("margin-top : " + formatValue(obj.margin.top));
+                    css.top = formatValue(obj.margin.top);
                 }
                 if (obj.margin.bottom !== undefined) {
-                    ret.push("margin-bottom : " + formatValue(obj.margin.bottom));
+                    css.bottom = formatValue(obj.margin.bottom);
                 }
             }
 
 
             if (obj.height !== undefined) {
-                ret.push("height : " + formatValue(obj.height));
+                css.height = formatValue(obj.height);
             }
             if (obj.style !== undefined) {
-                ret.push(obj.style);
+                var that = this;
+                jQuery(obj.style, function(index,value) {
+                    css[index] = formatValue(value);
+                });
             }
+            onObject.css(css);
 
-            if (ret.length == 0)
-                return null;
-
-            return ret.join(";");
+            return this;
         },
         buildElementAttr : function(attributes,obj) {
-            var ret = [];
+            var that = this;
 
-            jQuery.each(attributes, function(key, attr){
-                if (obj[attr] != null) {
-                    if (obj[attr].constructor == Boolean && obj[attr]) {
-                        ret.push(attr);
-                    } else {
-                        ret.push(attr + "=\"" + obj[attr] + "\"");
-                    }
-                }
-            });
-            return ret.join(" ");
+            if (obj == null) {
+                obj = this;
+            }
+
+            if (attributes == null) {
+                attributes = this.attributes;
+            }
+
+            this.element.attr(jQuery.jBuilder.intersect(attributes,obj));
+
+            return this;
         },
         destroy : function() {
             jQuery("." + this.eleID).remove();
