@@ -21,11 +21,10 @@ jQuery.extend(jQuery.jBuilder, {
             }
 
             function formatValue(val) {
-                if (val.constructor == String) {
-                    return val;
-                } else if (val.constructor == Number) {
+                if (val.constructor == Number) {
                     return val + "px"
                 }
+                return val;
             }
 
             var css = {};
@@ -72,7 +71,6 @@ jQuery.extend(jQuery.jBuilder, {
                 css.height = formatValue(obj.height);
             }
             if (obj.style !== undefined) {
-                var that = this;
                 jQuery(obj.style, function(index,value) {
                     css[index] = formatValue(value);
                 });
@@ -82,8 +80,6 @@ jQuery.extend(jQuery.jBuilder, {
             return this;
         },
         buildElementAttr : function(attributes,obj) {
-            var that = this;
-
             if (obj == null) {
                 obj = this;
             }

@@ -89,6 +89,7 @@ jQuery.extend({
             var html = this.doLayout(obj);
 
             // Check to see if we have a renderTo variable set to say where we want the code
+            /** @namespace obj.renderTo */
             if (obj.renderTo === undefined) {
                 // renderTo was not set so store it in the body
                 if (document.body !== null) {

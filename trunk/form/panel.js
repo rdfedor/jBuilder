@@ -3,12 +3,6 @@ jQuery.jBuilder.extend("form.panel", {
 
     attributes : ["id", "class", "method", "name", "action"],
     
-    init : function() {
-    	if (this.items === undefined) {
-            throw new Error("Form has no elements");
-        }
-    },
-    
     doLayout : function() {
         if (this.items === undefined) {
             throw new Error("Form has no elements");

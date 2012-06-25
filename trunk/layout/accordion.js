@@ -20,11 +20,6 @@ jQuery.jBuilder.extend("layout.accordion", {
 
         var that = this;
 
-        jQuery(document).bind("afterRender",function() {
-            jQuery("div." + that.eleID).accordion({autoHeight: false});
-            jQuery(document).unbind("afterRender", this);
-        });
-
         this.element = jQuery("<div>");
 
         this.buildElementAttr().buildStyleAttr().buildClassAttr();
@@ -34,10 +29,12 @@ jQuery.jBuilder.extend("layout.accordion", {
         }
 
         jQuery.each(this.items,function(index,obj) {
-            jQuery("<a>").attr("href","#").html(obj.label)
-                .add(jQuery("<div>").html(jQuery.jBuilder.doLayout(obj, this.defaults)))
-                .appendTo(this.element);
+            jQuery("<h3>").html(jQuery("<a>").attr("href","#").html(obj.label))
+                .add(jQuery("<div>").html(jQuery.jBuilder.doLayout(obj, that.defaults)))
+                .appendTo(that.element);
         });
+
+        this.element.accordion({autoHeight: false});
 
         return this.element;
     }

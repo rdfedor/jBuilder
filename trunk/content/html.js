@@ -1,8 +1,6 @@
 jQuery.jBuilder.extend("content.html", {
     alias : "html",
 
-    tpl : "<div #attr#>#text#</div>",
-
     attributes : ["id","class", "style"],
 
     class : "",
