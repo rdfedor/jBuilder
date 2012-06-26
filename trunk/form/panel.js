@@ -11,9 +11,11 @@ jQuery.jBuilder.extend("form.panel", {
             this.defaults = {};
         }
 
-        this.element = jQuery("<form>").append(jQuery.jBuilder.doLayout(this.items, this.defaults));
+        var form = jQuery("<form>").attr(jQuery.jBuilder.intersect(this.attributes,this)).append(jQuery.jBuilder.doLayout(this.items, this.defaults));
 
-        this.buildElementAttr().buildStyleAttr().buildClassAttr();
+        this.element = jQuery("<div>").append(form);
+
+        this.buildStyleAttr().buildClassAttr();
 
         return this.element;
     }
