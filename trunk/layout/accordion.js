@@ -1,4 +1,5 @@
-jQuery.jBuilder.extend("layout.accordion", {
+(function($){
+$.jB.extend("layout.accordion", {
     layout : "accordion",
 
     attributes : ["id", "class", "method", "name", "action"],
@@ -20,26 +21,26 @@ jQuery.jBuilder.extend("layout.accordion", {
 
         var that = this;
 
-        this.element = jQuery("<div>");
+        this.element = $("<div>");
 
         this.buildElementAttr().buildStyleAttr().buildClassAttr();
 
-        if (!jQuery.isArray(this.items)) {
+        if (!$.isArray(this.items)) {
             this.items = [this.items];
         }
 
-        jQuery.each(this.items,function(index,obj) {
-            var body = jQuery.jBuilder.doLayout(jQuery.jBuilder.filter(['height','width'],obj), that.defaults);
-            var bodyContainer = jQuery("<div>").html(body).css(jQuery.jBuilder.intersect(['height','width'],obj)).css({overflow : "hidden"});
+        $.each(this.items,function(index,obj) {
+            var body = $.jB.doLayout($.jB.filter(['height','width'],obj), that.defaults);
+            var bodyContainer = $("<div>").html(body).css($.jB.intersect(['height','width'],obj)).css({overflow : "hidden"});
 
-            jQuery("<h3>").html(jQuery("<a>").attr("href","#").html(obj.label))
-                .add(jQuery("<div>").html(bodyContainer))
+            $("<h3>").html($("<a>").attr("href","#").html(obj.label))
+                .add($("<div>").html(bodyContainer))
                 .appendTo(that.element);
-
-            jQuery(document).bind("afterRender",function() {
+             
+            $(document).bind("afterRender",function() {
                 that.element.accordion("activate",index);
                 if (bodyContainer.height() < body.height()) {
-                    jQuery("<div>").css({position:"absolute", top : 20, right : 4, height: "85%"}).slider({
+                    $("<div>").css({position:"absolute", top : 20, right : 4, height: "85%"}).slider({
                         orientation : "vertical",
                         value : 100,
                         slide: function( event, ui ) {
@@ -65,3 +66,4 @@ jQuery.jBuilder.extend("layout.accordion", {
         return this.element;
     }
 });
+})(jQuery);

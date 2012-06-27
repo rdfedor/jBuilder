@@ -1,4 +1,5 @@
-jQuery.jBuilder.extend("form.field.textfield", {
+(function($){
+$.jB.extend("form.field.textfield", {
     alias : "textfield",
 
     inputType : "textfield",
@@ -9,18 +10,22 @@ jQuery.jBuilder.extend("form.field.textfield", {
     class : "",
 
     doLayout : function() {
-        var label = new jQuery.jBuilder.form.field.label(this.cfg);
+        var label = new $.jB.form.field.label(this.cfg);
 
         this.type = this.inputType;
 
-        var inputField = jQuery("<input>").attr(jQuery.jBuilder.intersect(this.inputAttributes,this));
+        var inputField = $("<input>").attr($.jB.intersect(this.inputAttributes,this)).css({
+            borderWidth : 1,
+            borderStyle : "solid"
+        }).addClass("ui-corner-all");
 
         this.buildStyleAttr(null,inputField);
 
-        this.element = jQuery("<div>").append(label.doLayout()).append(inputField);
+        this.element = $("<div>").append(label.doLayout()).append(inputField);
 
         this.buildElementAttr().buildClassAttr();
 
         return this.element;
     }
 });
+})(jQuery);

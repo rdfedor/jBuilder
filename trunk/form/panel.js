@@ -1,4 +1,5 @@
-jQuery.jBuilder.extend("form.panel", {
+(function($){
+$.jB.extend("form.panel", {
     alias : "form",
 
     attributes : ["id", "class", "method", "name", "action"],
@@ -11,12 +12,13 @@ jQuery.jBuilder.extend("form.panel", {
             this.defaults = {};
         }
 
-        var form = jQuery("<form>").attr(jQuery.jBuilder.intersect(this.attributes,this)).append(jQuery.jBuilder.doLayout(this.items, this.defaults));
+        var form = $("<form>").attr($.jB.intersect(this.attributes,this)).append($.jB.doLayout(this.items, this.defaults));
 
-        this.element = jQuery("<div>").append(form);
+        this.element = $("<div>").append(form);
 
         this.buildStyleAttr().buildClassAttr();
 
         return this.element;
     }
 });
+})(jQuery);

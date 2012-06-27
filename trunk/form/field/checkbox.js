@@ -1,4 +1,5 @@
-jQuery.jBuilder.extend("form.field.checkbox", {
+(function($){
+$.jB.extend("form.field.checkbox", {
     alias : "checkbox",
 
     inputType : "checkbox",
@@ -13,23 +14,23 @@ jQuery.jBuilder.extend("form.field.checkbox", {
     },
 
     doLayout : function() {
-        var label = new jQuery.jBuilder.form.field.label(this.cfg),
+        var label = new $.jB.form.field.label(this.cfg),
             that = this;
 
-        this.element = jQuery("<div>").append(label.doLayout());
+        this.element = $("<div>").append(label.doLayout());
 
-        jQuery.each(this.items,function(index,opt) {
+        $.each(this.items,function(index,opt) {
             if (opt.value === undefined) {
                 opt.value = opt.label;
             }
 
             if (opt.id === undefined) {
-                opt.id = jQuery.jBuilder.generateUID();
+                opt.id = $.jB.generateUID();
             }
 
-            var checkbox = jQuery("<input>").attr("type",that.inputType)
-                .attr(jQuery.jBuilder.intersect(that.inputAttributes,opt))
-                .add(jQuery("<label>").attr("for",opt.id).html(opt.label));
+            var checkbox = $("<input>").attr("type",that.inputType)
+                .attr($.jB.intersect(that.inputAttributes,opt))
+                .add($("<label>").attr("for",opt.id).html(opt.label));
 
             that.element.append(checkbox);
         });
@@ -39,3 +40,4 @@ jQuery.jBuilder.extend("form.field.checkbox", {
         return this.element;
     }
 });
+})(jQuery);

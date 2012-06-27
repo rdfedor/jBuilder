@@ -1,17 +1,18 @@
-jQuery.jBuilder.extend("util.window",{
+(function($){
+$.jB.extend("util.window",{
     tpl : "<div #attr#>#body#</div>",
 
     attributes : ['id','title', 'class'],
 
     doLayout : function() {
 
-        this.element = jQuery("<div>").html(jQuery.jBuilder.doLayout(this.items));
+        this.element = $("<div>").html($.jB.doLayout(this.items));
         this.buildElementAttr();
 
         var filter = ['width','height', 'resizable', 'buttons','modal','minWidth', 'maxWidth'],
             cfg = {},
             that = this;
-        jQuery.each(filter, function(index,value) {
+        $.each(filter, function(index,value) {
             if (that.cfg[value] !== undefined) {
                 cfg[value] = that.cfg[value];
             }
@@ -25,11 +26,12 @@ jQuery.jBuilder.extend("util.window",{
     }
 });
 
-jQuery.extend(jQuery.jBuilder, {
+$.extend($.jB, {
     window : function(params) {
-        var obj = new jQuery.jBuilder.util.window(params);
-        jQuery("body").append(obj.doLayout());
-        jQuery(document).trigger("afterRender").unbind("afterRender");
+        var obj = new $.jB.util.window(params);
+        $("body").append(obj.doLayout());
+        $(document).trigger("afterRender").unbind("afterRender");
         return obj;
     }
 });
+})(jQuery);

@@ -1,14 +1,15 @@
-jQuery.extend({
+(function($){
+$.extend({
 	jBuilder : {
         elements : {},
 		aliases : {},
         layoutAlias : {},
 
-        // Our custom loading function for adding new functionality to the jBuilder core
+        // Our custom loading function for adding new functionality to the jB core
 		extend : function(classPath, params) {
             // Navigate through the classPath structure
 			var path = classPath.split("."),
-                next = jQuery.jBuilder,
+                next = $.jB,
                 className = path[path.length - 1];
 
             for (var x = 0 ; x < path.length - 1 ; x++) {
@@ -42,12 +43,12 @@ jQuery.extend({
                 var that = this;
 
                 // Combine this object with some default functions
-                jQuery.extend(this, jQuery.jBuilder.defaultPluginFunctions);
+                $.extend(this, $.jB.defaultPluginFunctions);
 
                 // Check to see if we're extending another, already existing, plugin
                 if (params.extend !== undefined) {
                     var path = params.extend.split("."),
-                        next = jQuery.jBuilder,
+                        next = $.jB,
                         className = path[path.length - 1];
 
                     for (var x = 0 ; x < path.length - 1 ; x++) {
@@ -56,29 +57,29 @@ jQuery.extend({
                         }
                         next = next[path[x]];
                     }
-                    params = jQuery.extend(new next[className](cfg),params);
+                    params = $.extend(new next[className](cfg),params);
                 }
 
                 if (params.ref !== undefined && params.ref.constructor == Object) {
-                    jQuery.each(params.ref,function(index,value) {
+                    $.each(params.ref,function(index,value) {
                         var funcName = index.charAt(0).toUpperCase + index.slice(1);
                         that["get" + funcName] = function() {
-                            return jQuery(value,that.element).find(value);
+                            return $(value,that.element).find(value);
                         };
 
                     });
                 }
 
                 // Create a unique id for this new element
-                this.eleID = jQuery.jBuilder.generateUID();
+                this.eleID = $.jB.generateUID();
 
                 // Store this to be retrieved later on
-                jQuery.jBuilder.elements[this.eleID] = this;
+                $.jB.elements[this.eleID] = this;
 
                 // Combine the plugin into this object along with the new config passed via parameters
-                jQuery.extend(this,params,cfg, {cfg : cfg});
+                $.extend(this,params,cfg, {cfg : cfg});
                 // Check if the plugin has an init function and run it
-            	if (jQuery.isFunction(this.init)) {
+            	if ($.isFunction(this.init)) {
             		this.init();
                 }
             };
@@ -93,55 +94,55 @@ jQuery.extend({
             if (obj.renderTo === undefined) {
                 // renderTo was not set so store it in the body
                 if (document.body !== null) {
-                    jQuery("body",document).append(html);
+                    $("body",document).append(html);
                 } else {
-                    jQuery("body",document.documentElement).append(html);
+                    $("body",document.documentElement).append(html);
                 }
             } else {
                 // renderTo was set so store the HTML in the appropriate location
                 if (obj.renderTo.constructor == String) {
-                    jQuery("#" + obj.renderTo).html(html);
-                } else if (obj.renderTo.constructor == jQuery) {
+                    $("#" + obj.renderTo).html(html);
+                } else if (obj.renderTo.constructor == $) {
                     obj.renderTo.html(html);
                 } else {
                     throw new Error("renderTo is an unknown object");
                 }
             }
 
-            jQuery(document).trigger("afterRender").unbind("afterRender");
+            $(document).trigger("afterRender").unbind("afterRender");
         },
         // Converts a JSON form into HTML
         doLayout : function(arr, defaultCfg) {
         	
-        	if (!jQuery.isArray(arr)) {
+        	if (!$.isArray(arr)) {
         		arr = [arr];
         	}
 
             if (defaultCfg === undefined) {
                 defaultCfg = {};
             } else {
-                defaultCfg = jQuery.jBuilder.filter(["defaults"],defaultCfg);
+                defaultCfg = $.jB.filter(["defaults"],defaultCfg);
             }
 
-        	var ret = jQuery(""),
+        	var ret = $(""),
                 that = this;
         	
-        	jQuery.each(arr,function(index,obj) {
+        	$.each(arr,function(index,obj) {
 
-                obj = jQuery.extend({},defaultCfg,obj);
+                obj = $.extend({},defaultCfg,obj);
 
-        		if (obj.type !== undefined && jQuery.jBuilder.aliases[obj.type] === undefined && obj.layout === undefined) {
+        		if (obj.type !== undefined && $.jB.aliases[obj.type] === undefined && obj.layout === undefined) {
                     throw new Error("Type " + obj.type + " does not exist");
-                } else if (obj.type === undefined && obj.layout !== undefined && jQuery.jBuilder.layoutAlias[obj.layout] === undefined) {
+                } else if (obj.type === undefined && obj.layout !== undefined && $.jB.layoutAlias[obj.layout] === undefined) {
                     throw new Error("Layout " + obj.layout + " does not exist");
                 }
 
                 var path = "",
-                    next = jQuery.jBuilder;
+                    next = $.jB;
                 if (obj.type !== undefined) {
-                    path = jQuery.jBuilder.aliases[obj.type].split(".");
+                    path = $.jB.aliases[obj.type].split(".");
                 } else if (obj.layout !== undefined) {
-                    path = jQuery.jBuilder.layoutAlias[obj.layout].split(".");
+                    path = $.jB.layoutAlias[obj.layout].split(".");
                 }
                 var className = path[path.length - 1];
 
@@ -163,4 +164,5 @@ jQuery.extend({
 });
 
 // Shorthand the jBuilder object for easy development
-jQuery.jB = jQuery.jBuilder;
+$.jB = $.jBuilder;
+})(jQuery);

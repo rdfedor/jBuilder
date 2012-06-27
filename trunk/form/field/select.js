@@ -1,4 +1,5 @@
-jQuery.jBuilder.extend("form.field.select", {
+(function($){
+$.jB.extend("form.field.select", {
     alias : "select",
 
     attributes : ["id","class"],
@@ -12,15 +13,15 @@ jQuery.jBuilder.extend("form.field.select", {
     },
 
     doLayout : function() {
-        var label = new jQuery.jBuilder.form.field.label(this.cfg),
+        var label = new $.jB.form.field.label(this.cfg),
             that = this;
 
-        this.element = jQuery("<div>").append(label.doLayout());
+        this.element = $("<div>").append(label.doLayout());
 
-        var selectElement = jQuery("<select>").attr(jQuery.jBuilder.intersect(this.inputAttributes,this));
+        var selectElement = $("<select>").attr($.jB.intersect(this.inputAttributes,this));
 
-        jQuery.each(this.items,function(index,opt) {
-            selectElement.append(jQuery("<option>").text(opt.label).attr(jQuery.jBuilder.intersect(that.selectAttributes,opt)));
+        $.each(this.items,function(index,opt) {
+            selectElement.append($("<option>").text(opt.label).attr($.jB.intersect(that.selectAttributes,opt)));
         });
         this.element.append(selectElement);
 
@@ -29,3 +30,4 @@ jQuery.jBuilder.extend("form.field.select", {
         return this.element;
     }
 });
+})(jQuery);

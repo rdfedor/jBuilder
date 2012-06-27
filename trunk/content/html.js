@@ -1,4 +1,5 @@
-jQuery.jBuilder.extend("content.html", {
+(function($){
+$.jB.extend("content.html", {
     alias : "html",
 
     attributes : ["id","class", "style"],
@@ -8,12 +9,12 @@ jQuery.jBuilder.extend("content.html", {
     doLayout : function() {
         var that = this;
 
-        this.element = jQuery("<div>");
+        this.element = $("<div>");
 
         this.buildElementAttr().buildStyleAttr().buildClassAttr();
 
         if (this.url !== undefined) {
-            jQuery.get(this.url, function(data) {
+            $.get(this.url, function(data) {
                 that.element.html(data);
             });
         } else {
@@ -23,3 +24,4 @@ jQuery.jBuilder.extend("content.html", {
         return this.element;
     }
 });
+})(jQuery);

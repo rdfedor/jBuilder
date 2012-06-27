@@ -1,4 +1,5 @@
-jQuery.extend(jQuery.jBuilder, {
+(function($){
+$.extend($.jB, {
     defaultPluginFunctions : {
 
         element : null,
@@ -71,7 +72,7 @@ jQuery.extend(jQuery.jBuilder, {
                 css.height = formatValue(obj.height);
             }
             if (obj.style !== undefined) {
-                jQuery(obj.style, function(index,value) {
+                $(obj.style, function(index,value) {
                     css[index] = formatValue(value);
                 });
             }
@@ -88,13 +89,14 @@ jQuery.extend(jQuery.jBuilder, {
                 attributes = this.attributes;
             }
 
-            this.element.attr(jQuery.jBuilder.intersect(attributes,obj));
+            this.element.attr($.jB.intersect(attributes,obj));
 
             return this;
         },
         destroy : function() {
-            jQuery("." + this.eleID).remove();
-            delete jQuery.jBuilder.elements[this.eleID];
+            $("." + this.eleID).remove();
+            delete $.jB.elements[this.eleID];
         }
     }
 });
+})(jQuery);

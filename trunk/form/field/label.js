@@ -1,4 +1,5 @@
-jQuery.jBuilder.extend("form.field.label", {
+(function($){
+$.jB.extend("form.field.label", {
     alias : "label",
 
     attributes : [],
@@ -10,7 +11,7 @@ jQuery.jBuilder.extend("form.field.label", {
     },
 
     doLayout : function() {
-        this.element = jQuery("<div>").addClass("fieldLabel");
+        this.element = $("<div>").addClass("fieldLabel");
 
         if (this.anchor !== undefined) {
             this.width = this.anchor;
@@ -25,3 +26,4 @@ jQuery.jBuilder.extend("form.field.label", {
         return this.element;
     }
 });
+})(jQuery);
