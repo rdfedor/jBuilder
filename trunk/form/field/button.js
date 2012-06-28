@@ -21,7 +21,7 @@
             }
 
             $.each(this.items, function(index,obj){
-                obj.id = $.jB.generateUID();
+                obj.id = $.jB.util.generateUID();
                 var button = $("<button>").text(obj.text).attr("id",obj.id).button().click(obj.handler);
                 that.element.append(button);
             });

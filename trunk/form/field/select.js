@@ -18,10 +18,10 @@ $.jB.extend("form.field.select", {
 
         this.element = $("<div>").append(label.doLayout());
 
-        var selectElement = $("<select>").attr($.jB.intersect(this.inputAttributes,this));
+        var selectElement = $("<select>").attr($.jB.util.intersect(this.inputAttributes,this));
 
         $.each(this.items,function(index,opt) {
-            selectElement.append($("<option>").text(opt.label).attr($.jB.intersect(that.selectAttributes,opt)));
+            selectElement.append($("<option>").text(opt.label).attr($.jB.util.intersect(that.selectAttributes,opt)));
         });
         this.element.append(selectElement);
 

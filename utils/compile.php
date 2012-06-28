@@ -22,11 +22,15 @@ eof;
 
 $files = array(
 	'core.js',
+    'window.js',
 	'util/defaultPluginFunctions.js',
 	'util/uid.js',
-	'util/window.js',
 	'util/filter.js',
+    'util/events.js',
+    'util/mousewheel.js',
+    'util/scrollBar.js',
 	'content/html.js',
+    'content/panel.js',
 	'layout/accordion.js',
 	'layout/tab.js',
 	'form/panel.js',

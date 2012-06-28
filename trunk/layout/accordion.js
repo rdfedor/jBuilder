@@ -4,6 +4,19 @@ $.jB.extend("layout.accordion", {
 
     attributes : ["id", "class", "method", "name", "action"],
 
+    events : {
+        onRender : function() {
+            var cmp = $.jB.getCmp($.jB.util.getJBID($(this)));
+            var tabs = cmp.element.children("div");
+            $.each(tabs,function(index,value) {
+                cmp.element.accordion("activate",index);
+                $.jB.util.scrollBar($(value),{rightOffset : 3, heightOffset : 10,topOffset : 20});
+            });
+            cmp.element.accordion("activate",0);
+            cmp.element.accordion({animated : true});
+        }
+    },
+
     init : function() {
         if (this.items === undefined) {
             throw new Error("Form has no elements");
@@ -30,35 +43,12 @@ $.jB.extend("layout.accordion", {
         }
 
         $.each(this.items,function(index,obj) {
-            var body = $.jB.doLayout($.jB.filter(['height','width'],obj), that.defaults);
-            var bodyContainer = $("<div>").html(body).css($.jB.intersect(['height','width'],obj)).css({overflow : "hidden"});
+            var body = $.jB.doLayout($.jB.util.filter(['height','width'],obj), that.defaults);
+            var bodyContainer = $("<div>").addClass("jBContent").html(body).css($.jB.util.intersect(['height','width'],obj)).css({overflow : "hidden"});
 
             $("<h3>").html($("<a>").attr("href","#").html(obj.label))
                 .add($("<div>").html(bodyContainer))
                 .appendTo(that.element);
-             
-            $(document).bind("afterRender",function() {
-                that.element.accordion("activate",index);
-                if (bodyContainer.height() < body.height()) {
-                    $("<div>").css({position:"absolute", top : 20, right : 4, height: "85%"}).slider({
-                        orientation : "vertical",
-                        value : 100,
-                        slide: function( event, ui ) {
-                            if ( body.height() > bodyContainer.height() ) {
-                                body.css( "margin-top", Math.round(
-                                    (100 - ui.value) / 100 * ( bodyContainer.height() - body.height() - 20 )
-                                ) + "px" );
-                            } else {
-                                body.css( "margin-top", 0 );
-                            }
-                        }
-                    }).appendTo(bodyContainer);
-                }
-                if (index == that.items.length - 1) {
-                    that.element.accordion("activate", 0);
-                    that.element.accordion({animated : true});
-                }
-            });
         });
 
         this.element.accordion({autoHeight: false,animated : false});

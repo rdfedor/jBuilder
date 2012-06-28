@@ -14,7 +14,7 @@ $.jB.extend("form.field.textfield", {
 
         this.type = this.inputType;
 
-        var inputField = $("<input>").attr($.jB.intersect(this.inputAttributes,this)).css({
+        var inputField = $("<input>").attr($.jB.util.intersect(this.inputAttributes,this)).css({
             borderWidth : 1,
             borderStyle : "solid"
         }).addClass("ui-corner-all");

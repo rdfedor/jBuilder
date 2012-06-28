@@ -25,11 +25,11 @@ $.jB.extend("form.field.checkbox", {
             }
 
             if (opt.id === undefined) {
-                opt.id = $.jB.generateUID();
+                opt.id = $.jB.util.generateUID();
             }
 
             var checkbox = $("<input>").attr("type",that.inputType)
-                .attr($.jB.intersect(that.inputAttributes,opt))
+                .attr($.jB.util.intersect(that.inputAttributes,opt))
                 .add($("<label>").attr("for",opt.id).html(opt.label));
 
             that.element.append(checkbox);

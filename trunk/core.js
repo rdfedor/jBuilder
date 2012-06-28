@@ -43,7 +43,7 @@ $.extend({
                 var that = this;
 
                 // Combine this object with some default functions
-                $.extend(this, $.jB.defaultPluginFunctions);
+                $.extend(this, $.jB.util.defaultPluginFunctions);
 
                 // Check to see if we're extending another, already existing, plugin
                 if (params.extend !== undefined) {
@@ -71,7 +71,7 @@ $.extend({
                 }
 
                 // Create a unique id for this new element
-                this.eleID = $.jB.generateUID();
+                this.eleID = $.jB.util.generateUID();
 
                 // Store this to be retrieved later on
                 $.jB.elements[this.eleID] = this;
@@ -90,26 +90,29 @@ $.extend({
             var html = this.doLayout(obj);
 
             // Check to see if we have a renderTo variable set to say where we want the code
+            var target = null;
             /** @namespace obj.renderTo */
             if (obj.renderTo === undefined) {
                 // renderTo was not set so store it in the body
                 if (document.body !== null) {
-                    $("body",document).append(html);
+                    target = $("body",document);
                 } else {
-                    $("body",document.documentElement).append(html);
+                    target = $("body",document.documentElement);
                 }
             } else {
                 // renderTo was set so store the HTML in the appropriate location
                 if (obj.renderTo.constructor == String) {
-                    $("#" + obj.renderTo).html(html);
+                    target = $("#" + obj.renderTo);
                 } else if (obj.renderTo.constructor == $) {
-                    obj.renderTo.html(html);
+                    target = obj.renderTo;
                 } else {
                     throw new Error("renderTo is an unknown object");
                 }
             }
 
-            $(document).trigger("afterRender").unbind("afterRender");
+            target.html(html);
+
+            $.jB.util.events.triggerChildEvents("onRender",target);
         },
         // Converts a JSON form into HTML
         doLayout : function(arr, defaultCfg) {
@@ -121,7 +124,7 @@ $.extend({
             if (defaultCfg === undefined) {
                 defaultCfg = {};
             } else {
-                defaultCfg = $.jB.filter(["defaults"],defaultCfg);
+                defaultCfg = $.jB.util.filter(["defaults"],defaultCfg);
             }
 
         	var ret = $(""),
@@ -156,9 +159,29 @@ $.extend({
                 var retObj = new next[className](obj);
                 that.elements[retObj.eleID] = retObj;
                 ret = ret.add(retObj.doLayout());
+                if (retObj.events !== undefined) {
+                    $.each(retObj.events, function(index,value) {
+                        retObj.element.bind(index,value);
+                    });
+                }
         	});
         	
             return ret;
+        },
+        getCmp : function(id) {
+            return $.jB.elements[id];
+        },
+        namespace : function() {
+            var a=arguments, o=null, i, j, d;
+            for (i=0; i<a.length; i=i+1) {
+                d=a[i].split(".");
+                o=window;
+                for (j=0; j<d.length; j=j+1) {
+                    o[d[j]]=o[d[j]] || {};
+                    o=o[d[j]];
+                }
+            }
+            return o;
         }
 	}
 });

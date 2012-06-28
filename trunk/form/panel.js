@@ -12,7 +12,7 @@ $.jB.extend("form.panel", {
             this.defaults = {};
         }
 
-        var form = $("<form>").attr($.jB.intersect(this.attributes,this)).append($.jB.doLayout(this.items, this.defaults));
+        var form = $("<form>").attr($.jB.util.intersect(this.attributes,this)).append($.jB.doLayout(this.items, this.defaults));
 
         this.element = $("<div>").append(form);
 
