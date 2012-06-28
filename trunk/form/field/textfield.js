@@ -9,6 +9,13 @@ $.jB.extend("form.field.textfield", {
 
     class : "",
 
+    events : {
+        keyup : function() {
+            var cmp = $.jB.getCmp($.jB.util.getJBID($(this)));
+            $.jB.util.validator.validate(cmp);
+        }
+    },
+
     doLayout : function() {
         var label = new $.jB.form.field.label(this.cfg);
 

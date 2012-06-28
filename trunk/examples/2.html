@@ -21,12 +21,14 @@
     <script type="text/javascript" src="../util/events.js"></script>
     <script type="text/javascript" src="../util/scrollBar.js"></script>
     <script type="text/javascript" src="../util/mousewheel.js"></script>
+    <script type="text/javascript" src="../util/validate.js"></script>
     <script type="text/javascript" src="../content/html.js"></script>
     <script type="text/javascript" src="../layout/accordion.js"></script>
     <script type="text/javascript" src="../layout/tab.js"></script>
     <script type="text/javascript" src="../form/panel.js"></script>
     <script type="text/javascript" src="../form/field/label.js"></script>
     <script type="text/javascript" src="../form/field/textfield.js"></script>
+    <script type="text/javascript" src="../form/field/datefield.js"></script>
     <script type="text/javascript" src="../form/field/password.js"></script>
     <script type="text/javascript" src="../form/field/select.js"></script>
     <script type="text/javascript" src="../form/field/checkbox.js"></script>
@@ -48,26 +50,37 @@
 					name : "username",
 					label : "Username",
 					width : 200,
-					tabindex : 1
+					tabindex : 1,
+                    minChar : 4
 				},{
+                    type : "datefield",
+                    name : "dob",
+                    width : 80,
+                    label : "Date of Birth",
+                    tabindex : 2
+                },{
 					name : "email",
 					label : "Email",
 					width : 200,
-					tabindex : 1
+					tabindex : 3,
+                    validator : "email"
 				},{
 					type : "password",
 					name : "userpass",
 					label : "Password",
+                    minChar : 6,
 					width : 200,
-					tabindex : 1
+					tabindex : 4
 				},{
 					type : "password",
 					label : "Re-type",
 					width : 200,
-					tabindex : 1
+                    minChar : 6,
+					tabindex : 5
 				},{
 					type : "button",
 					text : "Submit",
+                    tabindex : 6,
 					handler : function() {
 						alert("You clicked the Submit button!");
 						return false;

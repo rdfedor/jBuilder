@@ -39,8 +39,8 @@ $.extend({
 
             // Create the function to instantiate a new plugin
             next[className] = function(cfg) {
-
                 var that = this;
+                var newParams = $.extend({},params);
 
                 // Combine this object with some default functions
                 $.extend(this, $.jB.util.defaultPluginFunctions);
@@ -57,7 +57,8 @@ $.extend({
                         }
                         next = next[path[x]];
                     }
-                    params = $.extend(new next[className](cfg),params);
+                    var newClass = new next[className](cfg);
+                    newParams = $.extend({},newClass,params,{parent : newClass});
                 }
 
                 if (params.ref !== undefined && params.ref.constructor == Object) {
@@ -77,7 +78,7 @@ $.extend({
                 $.jB.elements[this.eleID] = this;
 
                 // Combine the plugin into this object along with the new config passed via parameters
-                $.extend(this,params,cfg, {cfg : cfg});
+                $.extend(this,newParams,cfg, {cfg : cfg});
                 // Check if the plugin has an init function and run it
             	if ($.isFunction(this.init)) {
             		this.init();
