@@ -17,20 +17,17 @@
             settings = $.extend({},defaults,settings);
 
             var field = cmp.element.find("input").removeClass("ui-state-ok").removeClass("ui-state-error");
-            /*
-            function updateTips( o, t ) {
 
-                o.title( t ).addClass( "ui-state-highlight" );
-                setTimeout(function() {
-                    o.removeClass( "ui-state-highlight", 1500 );
-                }, 500 );
+            function updateTips( m ) {
+
+                cmp.element.attr("title", m );
             }
-            */
+
 
             function checkRegExp(o, regex, m) {
                 if ( !( regex.test( o.val() ) ) ) {
                     o.addClass( "ui-state-error" );
-                    //updateTips( n );
+                    updateTips( m );
                     return false;
                 }
                 return true;
@@ -39,7 +36,7 @@
             function OK(o,c,m) {
                 if (!c) {
                     o.addClass( "ui-state-error" );
-                    //updateTips( n );
+                    updateTips( m );
                     return false;
                 }
                 return true;
@@ -52,6 +49,8 @@
                 if (!result) {
                     return result;
                 }
+            } else if (settings.allowBlank && field.val().length == 0) {
+                return result;
             }
 
             if (result && $.jB.util.validator.rules[settings.validator] !== undefined) {

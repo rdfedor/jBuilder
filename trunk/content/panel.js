@@ -20,7 +20,7 @@ $.jB.extend("content.panel", {
             this.defaults = {};
         }
 
-        var content = $("<div>").addClass("jBContent").html($.jB.doLayout(this.items)).css("padding",10);
+        var content = $("<div>").addClass("jBContent").html($.jB.doLayout(this.items)).css({paddingLeft : 20, paddingRight : 20, marginTop : 10});
         var container = $("<div>").addClass("ui-widget-content ui-corner-all");
 
         if (this.label !== undefined) {

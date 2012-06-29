@@ -16,6 +16,7 @@ $.jB.extend("content.html", {
         if (this.url !== undefined) {
             $.get(this.url, function(data) {
                 that.element.html(data);
+                that.element.parent().parent().trigger("onRender");
             });
         } else {
             this.element.html(this.text);
