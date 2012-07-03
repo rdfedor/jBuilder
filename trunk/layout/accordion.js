@@ -5,7 +5,7 @@ $.jB.extend("layout.accordion", {
     attributes : ["id", "class", "method", "name", "action"],
 
     events : {
-        onRender : function() {
+        onRender : function(e) {
             var cmp = $.jB.getCmp($.jB.util.getJBID($(this)));
             var tabs = cmp.element.children("div");
             $.each(tabs,function(index,value) {
@@ -14,6 +14,7 @@ $.jB.extend("layout.accordion", {
             });
             cmp.element.accordion("activate",0);
             cmp.element.accordion({animated : true});
+            e.stopPropagation();
         }
     },
 

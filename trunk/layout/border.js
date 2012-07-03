@@ -78,7 +78,7 @@
                         return;
                     }
                 }
-                cmp.regionHTML[index] = cmp.regionHTML[index].html($.jB.doLayout($.extend({}, value, extendProps)));
+                cmp.regionHTML[index] = cmp.regionHTML[index].html($.jB.doLayout($.extend({}, value, extendProps)).css({padding : 0, margin : 0}));
 
             });
         },

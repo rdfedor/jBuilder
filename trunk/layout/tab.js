@@ -9,7 +9,7 @@ $.jB.extend("layout.tab", {
     attributes : ["id", "class"],
 
     events : {
-        onRender : function() {
+        onRender : function(e) {
             var cmp = $.jB.getCmp($.jB.util.getJBID($(this)));
             var tabs = cmp.element.children("div");
             $.each(tabs,function(index,value) {
@@ -17,6 +17,7 @@ $.jB.extend("layout.tab", {
                 $.jB.util.scrollBar($(value),{rightOffset : 3, heightOffset : 0,topOffset : 20});
             });
             cmp.element.tabs("select",0);
+            e.stopPropagation();
         }
     },
 
