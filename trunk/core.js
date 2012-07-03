@@ -40,14 +40,14 @@ $.extend({
             // Create the function to instantiate a new plugin
             next[className] = function(cfg) {
                 var that = this;
-                var newParams = $.extend({},params);
+                var newParams = $.extend(true, {},params);
 
                 // Combine this object with some default functions
                 $.extend(this, $.jB.util.defaultPluginFunctions);
 
                 // Check to see if we're extending another, already existing, plugin
-                if (params.extend !== undefined) {
-                    var path = params.extend.split("."),
+                if (newParams.extend !== undefined) {
+                    var path = newParams.extend.split("."),
                         next = $.jB,
                         className = path[path.length - 1];
 
@@ -58,11 +58,11 @@ $.extend({
                         next = next[path[x]];
                     }
                     var newClass = new next[className](cfg);
-                    newParams = $.extend({},newClass,params,{parent : newClass});
+                    newParams = $.extend({},newClass,newParams,{parent : newClass});
                 }
 
-                if (params.ref !== undefined && params.ref.constructor == Object) {
-                    $.each(params.ref,function(index,value) {
+                if (newParams.ref !== undefined && newParams.ref.constructor == Object) {
+                    $.each(newParams.ref,function(index,value) {
                         var funcName = index.charAt(0).toUpperCase + index.slice(1);
                         that["get" + funcName] = function() {
                             return $(value,that.element).find(value);
@@ -78,7 +78,7 @@ $.extend({
                 $.jB.elements[this.eleID] = this;
 
                 // Combine the plugin into this object along with the new config passed via parameters
-                $.extend(this,newParams,cfg, {cfg : cfg});
+                $.extend(true, this,newParams,cfg, {cfg : cfg});
                 // Check if the plugin has an init function and run it
             	if ($.isFunction(this.init)) {
             		this.init();
