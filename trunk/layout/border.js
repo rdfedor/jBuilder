@@ -8,7 +8,14 @@
         init : function() {
             var that = this;
 
-            this.element = jQuery("<div>");
+            this.element = jQuery("<div>").css({
+                display: "block",
+                height : "100%",
+                width : "100%",
+                position: "absolute",
+                top : 0,
+                left : 0
+            });
 
             $.each(this.items, function(index,value) {
                 var obj = $.jB.util.filter(['region'],value);
@@ -98,7 +105,7 @@
             }
             return { width : e[ a+'Width' ], height : e[ a+'Height' ]}
             */
-            return {height : this.element.parent()[0].scrollHeight, width: this.element.parent().width()};
+            return {height : this.element.height(), width: this.element.width()};
         },
 
         calculateNorthPosition : function(doc) {
