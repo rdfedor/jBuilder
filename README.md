@@ -12,19 +12,20 @@ In your web page:
 
 ```html
 <script src="jquery.js"></script>
+<script src="jqueryui.js"></script>
 <script src="dist/jquery-jBuilder.min.js"></script>
 <script>
 jQuery(function($) {
-  $.awesome(); // "awesome"
+  jQuery.jBuilder.build({
+  	type : "html",
+  	text : "Hello world."
+  });
 });
 </script>
 ```
 
 ## Documentation
-_(Coming soon)_
-
-## Examples
-_(Coming soon)_
+Visit the [wiki][https://github.com/Nemesis9765/jBuilder/wiki].
 
 ## Release History
 _(Nothing yet)_
