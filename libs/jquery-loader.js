@@ -18,8 +18,8 @@
       path = 'http://code.jquery.com/ui/' + jqversion[1] + '/jquery-ui.js';
       csspath = 'http://code.jquery.com/ui/' + jqversion[1] + '/themes/base/jquery-ui.css';
   } else {
-      path = '../libs/jqueryui/jquery-ui-1.8.21.custom.js';
-      csspath = '../libs/jqueryui/themes/base/jquery.ui.all.css';
+      path = '../libs/jqueryui/jquery-ui-1.9.0.custom.js';
+      csspath = '../libs/jqueryui/themes/smoothness/jquery.ui.all.css';
   }
   document.write('<script src="' + path + '"></script>');
   document.write('<link rel="stylesheet" href="' + csspath + '" />');

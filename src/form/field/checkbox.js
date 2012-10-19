@@ -8,7 +8,7 @@ $.jB.extend("form.field.checkbox", {
     inputType : "checkbox",
 
     attributes : ["id","class"],
-    inputAttributes : ['id', 'name', 'value', 'title', 'tabindex', 'disabled'],
+    inputAttributes : ['id', 'name', 'value', 'title', 'tabindex', 'checked' ,'disabled'],
 
     init : function() {
         if (this.items === undefined) {

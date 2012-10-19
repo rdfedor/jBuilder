@@ -22,7 +22,8 @@
     }
   ],
   "dependencies": {
-    "jquery": "*"
+    "jquery": "1.8.*",
+    "jqueryui" : "1.9.*"
   },
   "keywords": ["UI", "Template", "Templating", "HTML", "JSON"]
 }

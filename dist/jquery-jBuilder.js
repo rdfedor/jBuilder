@@ -1273,7 +1273,7 @@ $.jB.extend("form.field.checkbox", {
     inputType : "checkbox",
 
     attributes : ["id","class"],
-    inputAttributes : ['id', 'name', 'value', 'title', 'tabindex', 'disabled'],
+    inputAttributes : ['id', 'name', 'value', 'title', 'tabindex', 'checked' ,'disabled'],
 
     init : function() {
         if (this.items === undefined) {
@@ -1407,3 +1407,21 @@ $.jB.extend("form.field.textfield", {
     }
 });
 })(jQuery);
+(function($) {
+
+"use strict";
+
+$.jB.extend("form.field.number", {
+    alias : "number",
+    extend : "form.field.textfield",
+    
+    events : {
+        onRender : function() {
+            var cmp = $.jB.getCmp($.jB.util.getJBID($(this)));
+            $(this).find("input").spinner($.jB.util.intersect(['disabled','icons','incremental','max','min','numberFormat','page','step'],cmp));
+        }
+    }
+});
+
+})(jQuery);
+
