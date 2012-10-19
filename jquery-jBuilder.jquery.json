@@ -1,0 +1,28 @@
+{
+  "name": "jquery-jBuilder",
+  "title": "jBuilder",
+  "description": "A UI templating plugin.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/Nemesis9765/jBuilder",
+  "author": {
+    "name": "Roger Fedor",
+    "email": "rdfedor@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nemesis9765/jBuilder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Nemesis9765/jBuilder/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/Nemesis9765/jBuilder/blob/master/LICENSE-MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": "*"
+  },
+  "keywords": ["UI", "Template", "Templating", "HTML", "JSON"]
+}

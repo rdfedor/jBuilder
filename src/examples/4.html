@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <title>jBuilder Example 2</title>
+
+    <link rel="stylesheet" href="../css/ui-lightness/jquery-ui-1.8.21.custom.css" />
+    <link rel="stylesheet" href="../css/jBuilder.css" />
+
+    <!-- Library Files -->
+    <script type="text/javascript" src="../lib/jquery-1.7.2.js"></script>
+    <script type="text/javascript" src="../lib/ui/jquery-ui-1.8.21.custom.js"></script>
+
+    <!-- jBuilder Files -->
+    <script type="text/javascript" src="../core.js"></script>
+    <script type="text/javascript" src="../util/filter.js"></script>
+    <script type="text/javascript" src="../window.js"></script>
+    <script type="text/javascript" src="../util/uid.js"></script>
+    <script type="text/javascript" src="../util/defaultPluginFunctions.js"></script>
+    <script type="text/javascript" src="../util/events.js"></script>
+    <script type="text/javascript" src="../util/scrollBar.js"></script>
+    <script type="text/javascript" src="../util/mousewheel.js"></script>
+    <script type="text/javascript" src="../content/html.js"></script>
+    <script type="text/javascript" src="../layout/accordion.js"></script>
+    <script type="text/javascript" src="../layout/tab.js"></script>
+    <script type="text/javascript" src="../form/panel.js"></script>
+    <script type="text/javascript" src="../form/field/label.js"></script>
+    <script type="text/javascript" src="../form/field/textfield.js"></script>
+    <script type="text/javascript" src="../form/field/password.js"></script>
+    <script type="text/javascript" src="../form/field/select.js"></script>
+    <script type="text/javascript" src="../form/field/checkbox.js"></script>
+    <script type="text/javascript" src="../form/field/radiogroup.js"></script>
+    <script type="text/javascript" src="../form/field/button.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery.jBuilder.build({
+                layout : 'accordion',
+                height : 300,
+                width : 400,
+                items : [{
+                    label : "Test Scroll",
+                    type : "html",
+                    text : "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean erat purus, malesuada ut ultrices quis, vulputate et augue. Aliquam erat volutpat. Sed sed nunc eu elit blandit tristique. Aliquam pulvinar velit id libero dignissim at consectetur tellus convallis. Sed sed risus id arcu molestie pulvinar vitae at est. Donec rhoncus erat tellus. Quisque mollis tempus sem ac commodo. In dui velit, lobortis non accumsan non, blandit vitae enim. Duis dignissim lacus nec nunc cursus lobortis at vel nisi. Sed urna massa, ullamcorper suscipit sodales et, fermentum non mi. Nam semper imperdiet placerat. Vivamus eget vehicula orci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porttitor lacus vitae enim cursus consectetur. Praesent at aliquam purus. Quisque placerat cursus purus egestas semper.</p><p>Maecenas molestie mi ut erat feugiat cursus. Nam quis magna libero. Suspendisse nec imperdiet sapien. Nam a arcu massa. Pellentesque in ante at lacus fringilla commodo vel eu enim. Proin ac nisl sed quam malesuada tempus. Nulla ligula quam, tincidunt vel semper vitae, elementum id tellus. Praesent lacinia elit et massa vehicula a auctor nisi adipiscing. Integer laoreet accumsan libero vitae viverra.</p>",
+                    height : 200
+                },{
+                    label : "Test Scroll 2",
+                    type : "html",
+                    text : "<p>Ut neque augue, ultrices non consectetur id, porta et ante. Maecenas cursus nulla quis velit ultricies ullamcorper. Fusce euismod iaculis eros, vitae venenatis dolor posuere nec. Duis lacinia tincidunt sagittis. Fusce sollicitudin tincidunt erat, vitae rutrum tellus egestas ac. Aliquam vitae eleifend elit. Nunc laoreet enim id ante rhoncus laoreet. Vivamus dignissim erat a diam facilisis pretium. Aenean sit amet mi nec nulla malesuada bibendum.</p><p>Quisque mattis leo ac magna vehicula ut dignissim elit ultrices. Suspendisse odio erat, tempus vitae bibendum eget, elementum in velit. Donec vehicula sem quis risus rutrum volutpat. Cras mauris metus, facilisis sit amet molestie vel, euismod ultrices libero. Curabitur id eros nulla. Cras malesuada justo et est auctor eget luctus nibh ultricies. Ut vulputate orci sed risus posuere sit amet ornare mi vehicula. Maecenas ut sem eget libero faucibus congue vel non ligula. Aenean eget nulla arcu. Nullam a porta erat. Sed placerat tempor faucibus. Nullam lobortis congue diam, id elementum metus faucibus et. Mauris non metus vitae nisl accumsan mattis. Vivamus condimentum gravida ullamcorper. Phasellus laoreet accumsan dui, sit amet pulvinar turpis viverra in. Nullam nec risus at lorem hendrerit ultricies quis et ipsum.</p>",
+                    height : 200
+                }]
+            });
+        });
+
+    </script>
+</head>
+<body>
+</body>
+</html>

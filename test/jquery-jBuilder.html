@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>jBuilder Test Suite</title>
+	<!-- Load local jQuery. This can be overridden with a ?jquery=___ param. -->
+	<script src="../libs/jquery-loader.js"></script>
+	<!-- Load local QUnit (grunt requires v1.0.0 or newer). -->
+	<link rel="stylesheet" href="../libs/qunit/qunit.css" media="screen">
+	<script src="../libs/qunit/qunit.js"></script>
+	<!-- Load local lib and tests. -->
+
+	<!-- jBuilder Files -->
+	<script type="text/javascript" src="../src/jquery-jBuilder.js"></script>
+	<script type="text/javascript" src="../src/util/defaultPluginFunctions.js"></script>
+	<script type="text/javascript" src="../src/util/uid.js"></script>
+	<script type="text/javascript" src="../src/util/filter.js"></script>
+	<script type="text/javascript" src="../src/form/panel.js"></script>
+	<script type="text/javascript" src="../src/form/field/label.js"></script>
+	<script type="text/javascript" src="../src/form/field/textfield.js"></script>
+	<script type="text/javascript" src="../src/form/field/password.js"></script>
+	<script type="text/javascript" src="../src/form/field/select.js"></script>
+	<script type="text/javascript" src="../src/form/field/checkbox.js"></script>
+	<script type="text/javascript" src="../src/form/field/radiogroup.js"></script>
+
+	<!-- Unit Tests -->
+	<script type="text/javascript" src="unit/jquery.jBuilder.js"></script>
+	<script type="text/javascript" src="unit/form/panel.js"></script>
+	<script type="text/javascript" src="unit/form/field/textfield.js"></script>
+	<script type="text/javascript" src="unit/form/field/password.js"></script>
+	<script type="text/javascript" src="unit/form/field/select.js"></script>
+	<script type="text/javascript" src="unit/form/field/checkbox.js"></script>
+</head>
+<body>
+  <h1 id="qunit-header">jBuilder Test Suite</h1>
+  <h2 id="qunit-banner"></h2>
+  <div id="qunit-testrunner-toolbar"></div>
+  <h2 id="qunit-userAgent"></h2>
+  <ol id="qunit-tests"></ol>
+  <div id="qunit-fixture">
+    <span>lame test markup</span>
+    <span>normal test markup</span>
+    <span>awesome test markup</span>
+  </div>
+</body>
+</html>
