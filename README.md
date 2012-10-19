@@ -25,7 +25,7 @@ jQuery(function($) {
 ```
 
 ## Documentation
-Visit the [wiki][https://github.com/Nemesis9765/jBuilder/wiki].
+Visit the wiki at https://github.com/Nemesis9765/jBuilder/wiki
 
 ## Release History
 _(Nothing yet)_
