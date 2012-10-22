@@ -1,4 +1,4 @@
-/*! jBuilder - v0.1.0 - 2012-10-19
+/*! jBuilder - v0.1.0 - 2012-10-21
 * https://github.com/Nemesis9765/jBuilder
 * Copyright (c) 2012 Roger Fedor; Licensed MIT */
 
@@ -63,8 +63,7 @@ $.extend({
                         }
                         next = next[path[x]];
                     }
-                    newClass = new next[className](cfg);
-                    newParams = $.extend({},newClass,newParams,{parent : newClass});
+                    newParams = $.extend({},next[className].cfg,newParams,{parent : next[className].cfg});
                 }
 
                 if (newParams.ref !== undefined && newParams.ref.constructor === Object) {
@@ -90,6 +89,7 @@ $.extend({
                     this.init();
                 }
             };
+            next[className].cfg = params;
 		},
         // Converts a JSON form into HTML and renders it at a specific location
         build : function(obj) {
@@ -415,7 +415,7 @@ $.extend($.jB.util,{
 
             var el = [];
             $.each($(obj).find("*"), function(index,value){
-                var data = $.data(value,"events");
+                var data = $._data(value,"events");
                 if (data !== undefined && data[name] !== undefined) {
                     el.push(value);
                 }
@@ -425,6 +425,7 @@ $.extend($.jB.util,{
         },
 
         triggerChildEvents : function(name,obj) {
+            //obj.children().find("*").trigger(name);
             $.each(this.findElementsByTrigger(name,obj),function(index,value) {
                 $(this).trigger(name);
             });
@@ -702,7 +703,7 @@ $.jB.extend("content.panel", {
     alias : "panel",
 
     events : {
-        onResize : function() {
+        onResize : function(e) {
             var cmp = $.jB.getCmp($.jB.util.getJBID($(this)));
             cmp.element.css({
                 height : cmp.height,
@@ -717,6 +718,8 @@ $.jB.extend("content.panel", {
             }
 
             cmp.element.children(".jBContent").css(newCSS);
+            
+            e.stopPropagation();
         },
         onRender : function(e) {
             var cmp = $.jB.getCmp($.jB.util.getJBID($(this)));
@@ -791,57 +794,64 @@ $.jB.extend("content.panel", {
             }
 
             $(window).resize(function() {
-                that.runViewportPositioning(that);
+                that.runViewportPositioning.call(that);
             });
         },
 
         events : {
+            onResize : function(e) {
+                var cmp = $.jB.getCmp($.jB.util.getJBID($(this)));
+                cmp.runViewportPositioning.call(cmp);
+                $.jB.util.events.triggerChildEvents("onResize",cmp.element.children());
+                e.stopPropagation();
+            },
             onRender : function(e) {
                 var cmp = $.jB.getCmp($.jB.util.getJBID($(this)));
-                cmp.runViewportPositioning(cmp);
+                cmp.runViewportPositioning.call(cmp);
                 $.jB.util.events.triggerChildEvents("onRender",cmp.element.children());
                 e.stopPropagation();
             }
         },
 
-        runViewportPositioning : function(cmp) {
-            var viewportSize = cmp.getViewportSize();
-            if (cmp.regionHTML.north !== undefined) {
-                cmp.calculateNorthPosition(viewportSize);
+        runViewportPositioning : function() {
+            var viewportSize = this.getViewportSize(),
+                that = this;
+            if (this.regionHTML.north !== undefined) {
+                this.calculateNorthPosition(viewportSize);
             }
 
-            if (cmp.regionHTML.south !== undefined) {
-                cmp.calculateSouthPosition(viewportSize);
+            if (this.regionHTML.south !== undefined) {
+                this.calculateSouthPosition(viewportSize);
             }
 
-            if (cmp.regionHTML.east !== undefined) {
-                cmp.calculateEastPosition(viewportSize);
+            if (this.regionHTML.east !== undefined) {
+                this.calculateEastPosition(viewportSize);
             }
 
-            if (cmp.regionHTML.west !== undefined) {
-                cmp.calculateWestPosition(viewportSize);
+            if (this.regionHTML.west !== undefined) {
+                this.calculateWestPosition(viewportSize);
             }
 
-            if (cmp.regionHTML.center !== undefined) {
-                cmp.calculateCenterPosition(viewportSize);
+            if (this.regionHTML.center !== undefined) {
+                this.calculateCenterPosition(viewportSize);
             }
 
-            $.each(cmp.regions, function(index,value) {
+            $.each(this.regions, function(index,value) {
                 var extendProps = {
-                    height : cmp.regionHTML[index].height(),
-                    width : cmp.regionHTML[index].width()
+                    height : that.regionHTML[index].height(),
+                    width : that.regionHTML[index].width()
                 };
 
-                var objCmp = cmp.regionHTML[index].children();
+                var objCmp = that.regionHTML[index].children();
                 if (objCmp.length > 0) {
                     objCmp = $.jB.getCmp($.jB.util.getJBID(objCmp));
                     if (objCmp.events !== undefined && objCmp.events.onResize !== undefined) {
                         $.extend(objCmp,extendProps);
-                        cmp.regionHTML[index].children().trigger('onResize');
+                        $.jB.util.events.triggerChildEvents("onResize",that.regionHTML[index]);
                         return;
                     }
                 }
-                cmp.regionHTML[index] = cmp.regionHTML[index].html($.jB.doLayout($.extend({}, value, extendProps)).css({padding : 0, margin : 0}));
+                that.regionHTML[index] = that.regionHTML[index].html($.jB.doLayout($.extend({}, value, extendProps)).css({padding : 0, margin : 0}));
 
             });
         },

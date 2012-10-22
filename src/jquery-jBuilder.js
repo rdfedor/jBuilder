@@ -67,8 +67,7 @@ $.extend({
                         }
                         next = next[path[x]];
                     }
-                    newClass = new next[className](cfg);
-                    newParams = $.extend({},newClass,newParams,{parent : newClass});
+                    newParams = $.extend({},next[className].cfg,newParams,{parent : next[className].cfg});
                 }
 
                 if (newParams.ref !== undefined && newParams.ref.constructor === Object) {
@@ -94,6 +93,7 @@ $.extend({
                     this.init();
                 }
             };
+            next[className].cfg = params;
 		},
         // Converts a JSON form into HTML and renders it at a specific location
         build : function(obj) {

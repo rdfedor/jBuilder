@@ -3,7 +3,7 @@ $.jB.extend("content.panel", {
     alias : "panel",
 
     events : {
-        onResize : function() {
+        onResize : function(e) {
             var cmp = $.jB.getCmp($.jB.util.getJBID($(this)));
             cmp.element.css({
                 height : cmp.height,
@@ -18,6 +18,8 @@ $.jB.extend("content.panel", {
             }
 
             cmp.element.children(".jBContent").css(newCSS);
+            
+            e.stopPropagation();
         },
         onRender : function(e) {
             var cmp = $.jB.getCmp($.jB.util.getJBID($(this)));
