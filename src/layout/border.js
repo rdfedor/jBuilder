@@ -81,7 +81,7 @@
                     objCmp = $.jB.getCmp($.jB.util.getJBID(objCmp));
                     if (objCmp.events !== undefined && objCmp.events.onResize !== undefined) {
                         $.extend(objCmp,extendProps);
-                        $.jB.util.events.triggerChildEvents("onResize",that.regionHTML[index]);
+                        that.regionHTML[index].children().trigger('onResize');
                         return;
                     }
                 }

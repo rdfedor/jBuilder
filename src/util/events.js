@@ -18,7 +18,6 @@
         },
 
         triggerChildEvents : function(name,obj) {
-            //obj.children().find("*").trigger(name);
             $.each(this.findElementsByTrigger(name,obj),function(index,value) {
                 $(this).trigger(name);
             });
